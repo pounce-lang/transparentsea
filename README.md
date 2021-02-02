@@ -1,2 +1,13 @@
 # transparentsea
-Well there has to be graphics or I would'nt do it, and there has to transparentcy to make you think that there are layers. Oh and interpreted code mixed with a UI to draw, but keep it to simple bars and stripes (at first). Then maybe later go wavey and moving. keep it simple have fun 
+Well there has to be graphics or we wouldn't be interested in it and it has to have transparency to give the illusion of layers. Oh and interpreted Pounce code mixed with a UI to draw. Keeping it to simple stripes of color, then maybe later go wavey and moving. Above all "keep having fun with it!"
+
+## made with Vite
+`npm install`
+`npm run dev`
+
+## made with Konva
+react-konva = React + Konva
+
+## made with Pounce-lang
+a language that extends the lineage of FORTH, PostScript, Joy, Cat
+
