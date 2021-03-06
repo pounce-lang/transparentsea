@@ -11,7 +11,10 @@ function App() {
       <header className="App-header">
         <KonvaCanvas pounceCode={
           `
-          [uncons uncons pop [id shape xy w] [shape square == [xy [w 2 / +] map] [xy] if-else] pounce] [get-xy] compose
+          [uncons uncons pop 
+            [id shape xy w] 
+            [shape square == [xy [w 2 / +] map] [xy] if-else] pounce
+          ] [get-xy] compose
           [stack-copy [get-xy] map
           [concat] map2
           [[l-1 stripe] swap concat] map
