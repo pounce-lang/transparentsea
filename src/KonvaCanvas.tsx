@@ -14,12 +14,12 @@ import {
 // so we need to import required shapes manually
 import "konva/lib/shapes/Rect";
 import "konva/lib/shapes/Circle";
-import { parse, unParse , interpreter} from '@pounce-lang/core';
+import { parse, unParse, interpreter } from '@pounce-lang/core';
 
 
 const paintElement = (adjust: any, coords: any, color: any = "tan") => {
   // console.log(coords);
-  
+
   switch (coords[1]) {
     case 'square':
       return <Rect
@@ -31,8 +31,8 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
         shadowBlur={20}
         draggable
         onDragMove={(e: any) => {
-          const attr = e?.target?.attrs || {x: 0, y: 0};
-          const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]] 
+          const attr = e?.target?.attrs || { x: 0, y: 0 };
+          const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]]
           adjust(newCoords);
         }}
       //onDragEnd
@@ -48,7 +48,7 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
         draggable
         onDragMove={(e: any) => {
           const attr = e.target.attrs;
-          const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]] 
+          const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]]
           adjust(newCoords);
         }}
       />;
@@ -57,9 +57,9 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
       return <Rect
         x={coords[2]}
         y={coords[3]}
-        width={coords[4]-coords[2]}
-        height={coords[5]-coords[3]}
-        fill="red"
+        width={coords[4] - coords[2]}
+        height={coords[5] - coords[3]}
+        fill="blue"
         opacity={0.5}
         draggable
       />;
@@ -78,28 +78,51 @@ const pounceOn = (shapes: any, code: any) => {
 
 export const KonvaCanvas = (props: any) => {
   const [shapes, setPs] = useState(parse(props.shapes));
-  const [canvasCmds, setCc] = useState(pounceOn(shapes, props.pounceCode));
-  
+  const [code, setCode] = useState(props.pounceCode);
+  const [canvasCmds, setCc] = useState(pounceOn(shapes, code));
+
   const alterShape = (i: any) => (pSnippet: any) => {
-    let newPs = [...shapes]; 
+    let newPs = [...shapes];
     newPs[i] = pSnippet;
     setPs(newPs);
     setCc(pounceOn(newPs, props.pounceCode))
   };
-  
-  return (
-    <Stage style={{ width: 670, height: 500, backgroundColor: "#ffffff" }}
-      width={670} height={500}>
-      <Layer>
-        {
-          canvasCmds.filter((e: any) => e[1] === 'stripe')
-          .map((coordinate: any, i: any) => paintElement(alterShape(i), coordinate))
-        }
-        {
-          canvasCmds.filter((e: any) => e[1] !== 'stripe')
-          .map((coordinate: any, i: any) => paintElement(alterShape(i), coordinate))
-        }
-      </Layer>
-    </Stage>
+
+  return (<div className="parent">
+    <div className="div1">transparentsea</div>
+    <div className="div2">
+      <textarea
+        rows={20} cols={50}
+        wrap="true" value={unParse(shapes)}
+        onChange={(e) => setPs(parse(e.target.value))}
+        spellCheck="false"
+      >
+      </textarea>
+    </div>
+    <div className="div3">
+    <textarea
+        rows={20} cols={50}
+        wrap="true" value={code}
+        onChange={(e) => setCode(e.target.value)}
+        spellCheck="false"
+      >
+      </textarea>
+    </div>
+    <div className="div4">
+      <Stage style={{ width: 670, height: 500, backgroundColor: "#ffffff" }}
+        width={670} height={500}>
+        <Layer>
+          {
+            canvasCmds.filter((e: any) => e[1] === 'stripe')
+              .map((coordinate: any, i: any) => paintElement(alterShape(i), coordinate))
+          }
+          {
+            canvasCmds.filter((e: any) => e[1] !== 'stripe')
+              .map((coordinate: any, i: any) => paintElement(alterShape(i), coordinate))
+          }
+        </Layer>
+      </Stage>
+    </div>
+  </div>
   );
 };
