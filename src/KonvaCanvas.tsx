@@ -60,7 +60,7 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
         width={coords[4] - coords[2]}
         height={coords[5] - coords[3]}
         fill="blue"
-        opacity={0.5}
+        opacity={0.3}
         draggable
       />;
       break;

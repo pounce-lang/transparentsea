@@ -6,8 +6,8 @@ import { KonvaCanvas } from './KonvaCanvas';
 function App() {
   const [src, setSrc] = useState(`
   [c-1 circle 100 200 20] [s-1 square 200 100 40]
-  [c-2 circle 100 210 20] [s-2 square 250 100 40]
-  [c-3 circle 100 220 20] [s-3 square 290 100 40]
+  [c-2 circle 100 220 20] [s-2 square 250 100 40]
+  [c-3 circle 100 240 20] [s-3 square 300 100 40]
   `);
 
   return (
