@@ -13,7 +13,7 @@ function App() {
       
           <KonvaCanvas pounceCode={
             `
-# generative art?: a grid of random rectangles
+# generative art? using pounce programming language: a grid of random rectangles
 [10] [w] compose
 [400] [h] compose
 [40] [startx] compose
