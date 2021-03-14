@@ -55,37 +55,78 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
       break;
     case 'stripe':
       return <Rect
+       key={coords[0]}
         x={coords[2]}
         y={coords[3]}
-        width={coords[4] - coords[2]}
-        height={coords[5] - coords[3]}
+        width={coords[4]}
+        height={coords[5]}
         fill="blue"
         opacity={0.3}
         draggable
+        // onDragMove={(e: any) => {
+        //   const attr = e?.target?.attrs || { x: 0, y: 0 };
+        //   console.log(attr);
+        //   switch (e?.target?.attrs?.edit) {
+        //     case 'x':
+        //       adjust([coords[0], coords[1], attr.x, coords[3], coords[4], coords[5]]);
+        //       break;
+        //     case 'y':
+        //       adjust([coords[0], coords[1], coords[2], attr.y, coords[4], coords[5]]);
+        //       break;
+        //     case 'w':
+        //       adjust([coords[0], coords[1], coords[2], coords[3], attr.x - attr.width, coords[5]]);
+        //       break;
+        //     case 'h':
+        //       adjust([coords[0], coords[1], coords[2], coords[3], attr.x - attr.width, coords[5]]);
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
+        // }
+        onMouseDown={function (click) {
+          const x = click.evt.layerX - click.target.attrs.x;
+          const y = click.evt.layerY - click.target.attrs.y;
+          console.log(click.target.attrs.width - x, click.target.attrs.height - y);
+          if (x < 10) {
+            click.target.attrs.edit = "x";
+          }
+          else if (y < 10) {
+            click.target.attrs.edit = "y";
+          }
+          else if (click.target.attrs.width - x < 10) {
+            click.target.attrs.edit = "w";
+          }
+          else if (click.target.attrs.height - y < 10) {
+            click.target.attrs.edit = "h";
+          }
+        }
+        }
+
+
       />;
       break;
     default:
   }
 };
 
-const pounceOn = (shapes: any, code: any) => {
-  const upShapes = unParse(shapes);
-  const cat = interpreter(upShapes + " " + code);
+const pounceOn = (code: any) => {
+  const cat = interpreter(code);
   const canvasCmds = cat.next()?.value?.stack;
   return canvasCmds;
 };
 
 
 export const KonvaCanvas = (props: any) => {
-  const [shapes, setPs] = useState(parse(props.shapes));
   const [code, setCode] = useState(props.pounceCode);
-  const [canvasCmds, setCc] = useState(pounceOn(shapes, code));
+  const canvasCmds = pounceOn(code);
+  const [shapes, setPs] = useState(canvasCmds);
 
   const alterShape = (i: any) => (pSnippet: any) => {
     let newPs = [...shapes];
     newPs[i] = pSnippet;
     setPs(newPs);
-    setCc(pounceOn(newPs, props.pounceCode))
+    // setCc(pounceOn(newPs, props.pounceCode))
   };
 
   return (<div className="parent">
@@ -100,7 +141,7 @@ export const KonvaCanvas = (props: any) => {
       </textarea>
     </div>
     <div className="div3">
-    <textarea
+      <textarea
         rows={20} cols={50}
         wrap="true" value={code}
         onChange={(e) => setCode(e.target.value)}
@@ -109,7 +150,7 @@ export const KonvaCanvas = (props: any) => {
       </textarea>
     </div>
     <div className="div4">
-      <Stage style={{ width: 670, height: 500, backgroundColor: "#ffffff" }}
+      <Stage style={{ width: 670, height: 500, backgroundColor: "#eee" }}
         width={670} height={500}>
         <Layer>
           {
