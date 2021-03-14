@@ -156,12 +156,8 @@ export const KonvaCanvas = (props: any) => {
         width={670} height={500}>
         <Layer>
           {
-            canvasCmds.filter((e: any) => e[1] === 'stripe')
-              .map((coordinate: any, i: any) => paintElement(coordinate))
-          }
-          {
-            canvasCmds.filter((e: any) => e[1] !== 'stripe')
-              .map((coordinate: any, i: any) => paintElement(coordinate))
+            canvasCmds
+              .map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
           }
         </Layer>
       </Stage>

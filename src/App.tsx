@@ -13,24 +13,30 @@ function App() {
       
           <KonvaCanvas pounceCode={
             `
-[400] [w] compose
+# generative art?: a grid of random rectangles
+[10] [w] compose
 [400] [h] compose
-[80] [startx] compose
-[80] [starty] compose
+[40] [startx] compose
+[40] [starty] compose
+[60] [sp] compose 
+[50] [sz] compose 
 128 seedrandom
-[random 5 * 2.5 - +] [crand] compose
+[random 20 * 10 - +] [rnd] compose
 
 [
-  [x y s]
-  [x 30 + w > 
-    [startx y 30 + s] 
-    [x 30 crand + y crand s] if-else 
-    uncons swap drop x w * y + swap cons] pounce
+  [i] [
+    i 1 + 
+    i w % sp * startx + 
+    i w / floor sp * starty +] pounce
 ] [grid] compose
-startx starty [0 stripe] 
-[[x y s] [s x push y push 20 push 20 push x y s grid] pounce] 45 times
-drop drop drop
-          `}
+
+[stripe] 0  
+[[s i] [s i grid] pounce
+  [s i x y] 
+  [s x rnd push y rnd push sz rnd push sz rnd push s i] pounce
+] 60 times
+drop drop
+            `}
             shapes={
               src
             }
