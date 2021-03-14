@@ -63,47 +63,6 @@ const paintElement = (coords: any, color: any = "tan") => {
         fill="blue"
         opacity={0.3}
         draggable
-        // onDragMove={(e: any) => {
-        //   const attr = e?.target?.attrs || { x: 0, y: 0 };
-        //   console.log(attr);
-        //   switch (e?.target?.attrs?.edit) {
-        //     case 'x':
-        //       adjust([coords[0], coords[1], attr.x, coords[3], coords[4], coords[5]]);
-        //       break;
-        //     case 'y':
-        //       adjust([coords[0], coords[1], coords[2], attr.y, coords[4], coords[5]]);
-        //       break;
-        //     case 'w':
-        //       adjust([coords[0], coords[1], coords[2], coords[3], attr.x - attr.width, coords[5]]);
-        //       break;
-        //     case 'h':
-        //       adjust([coords[0], coords[1], coords[2], coords[3], attr.x - attr.width, coords[5]]);
-        //       break;
-        //     default:
-        //       break;
-        //   }
-        // }
-        // }
-        onMouseDown={function (click) {
-          const x = click.evt.layerX - click.target.attrs.x;
-          const y = click.evt.layerY - click.target.attrs.y;
-          console.log(click.target.attrs.width - x, click.target.attrs.height - y);
-          if (x < 10) {
-            click.target.attrs.edit = "x";
-          }
-          else if (y < 10) {
-            click.target.attrs.edit = "y";
-          }
-          else if (click.target.attrs.width - x < 10) {
-            click.target.attrs.edit = "w";
-          }
-          else if (click.target.attrs.height - y < 10) {
-            click.target.attrs.edit = "h";
-          }
-        }
-        }
-
-
       />;
       break;
     default:
@@ -113,7 +72,8 @@ const paintElement = (coords: any, color: any = "tan") => {
 const pounceOn = (code: any) => {
   const cat = interpreter(code);
   try {
-  return cat.next()?.value?.stack || [];
+    const retval = cat.next()?.value;
+    return retval? retval?.stack: [];
   } catch (e) {
     console.error(e);
     return [];
@@ -132,7 +92,7 @@ export const KonvaCanvas = (props: any) => {
   
 
   return (<div className="parent">
-    <div className="div1">transparentsea</div>
+    <div className="div1"><h3>transparentsea</h3></div>
     <div className="div2">
       <textarea
         rows={20} cols={50}
