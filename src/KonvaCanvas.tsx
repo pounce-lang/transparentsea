@@ -17,7 +17,7 @@ import "konva/lib/shapes/Circle";
 import { parse, unParse, interpreter } from '@pounce-lang/core';
 
 
-const paintElement = (adjust: any, coords: any, color: any = "tan") => {
+const paintElement = (coords: any, color: any = "tan") => {
   // console.log(coords);
 
   switch (coords[1]) {
@@ -33,7 +33,7 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
         onDragMove={(e: any) => {
           const attr = e?.target?.attrs || { x: 0, y: 0 };
           const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]]
-          adjust(newCoords);
+          //adjust(newCoords);
         }}
       //onDragEnd
       />;
@@ -49,7 +49,7 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
         onDragMove={(e: any) => {
           const attr = e.target.attrs;
           const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]]
-          adjust(newCoords);
+          // adjust(newCoords);
         }}
       />;
       break;
@@ -112,30 +112,32 @@ const paintElement = (adjust: any, coords: any, color: any = "tan") => {
 
 const pounceOn = (code: any) => {
   const cat = interpreter(code);
-  const canvasCmds = cat.next()?.value?.stack;
-  return canvasCmds;
+  try {
+  return cat.next()?.value?.stack || [];
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
 };
 
 
 export const KonvaCanvas = (props: any) => {
   const [code, setCode] = useState(props.pounceCode);
-  const canvasCmds = pounceOn(code);
-  const [shapes, setPs] = useState(canvasCmds);
-
-  const alterShape = (i: any) => (pSnippet: any) => {
-    let newPs = [...shapes];
-    newPs[i] = pSnippet;
-    setPs(newPs);
-    // setCc(pounceOn(newPs, props.pounceCode))
-  };
+  // console.log("code", code);
+  let canvasCmds = pounceOn(code);
+  
+  if (!canvasCmds) {
+    canvasCmds = [];
+  }
+  
 
   return (<div className="parent">
     <div className="div1">transparentsea</div>
     <div className="div2">
       <textarea
         rows={20} cols={50}
-        wrap="true" value={unParse(shapes)}
-        onChange={(e) => setPs(parse(e.target.value))}
+        wrap="true" value={unParse(canvasCmds)}
+      //  onChange={(e) => setPs(parse(e.target.value))}
         spellCheck="false"
       >
       </textarea>
@@ -155,11 +157,11 @@ export const KonvaCanvas = (props: any) => {
         <Layer>
           {
             canvasCmds.filter((e: any) => e[1] === 'stripe')
-              .map((coordinate: any, i: any) => paintElement(alterShape(i), coordinate))
+              .map((coordinate: any, i: any) => paintElement(coordinate))
           }
           {
             canvasCmds.filter((e: any) => e[1] !== 'stripe')
-              .map((coordinate: any, i: any) => paintElement(alterShape(i), coordinate))
+              .map((coordinate: any, i: any) => paintElement(coordinate))
           }
         </Layer>
       </Stage>
