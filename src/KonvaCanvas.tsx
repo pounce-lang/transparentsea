@@ -70,8 +70,8 @@ const paintElement = (coords: any, color: any = "tan") => {
 };
 
 const pounceOn = (code: any) => {
-  const cat = interpreter(code);
   try {
+    const cat = interpreter(code);
     const retval = cat.next()?.value;
     return retval? retval?.stack: [];
   } catch (e) {
