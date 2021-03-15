@@ -18,8 +18,6 @@ import { parse, unParse, interpreter } from '@pounce-lang/core';
 
 
 const paintElement = (coords: any, color: any = "tan") => {
-  // console.log(coords);
-
   switch (coords[1]) {
     case 'square':
       return <Rect
@@ -27,15 +25,8 @@ const paintElement = (coords: any, color: any = "tan") => {
         y={coords[3]}
         width={coords[4]}
         height={coords[4]}
-        fill="pink"
-        shadowBlur={20}
-        draggable
-        onDragMove={(e: any) => {
-          const attr = e?.target?.attrs || { x: 0, y: 0 };
-          const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]]
-          //adjust(newCoords);
-        }}
-      //onDragEnd
+        fill="blue"
+        opacity={0.3}
       />;
       break;
     case 'circle':
@@ -43,17 +34,11 @@ const paintElement = (coords: any, color: any = "tan") => {
         x={coords[2]}
         y={coords[3]}
         radius={coords[4]}
-        fill="pink"
-        shadowBlur={20}
-        draggable
-        onDragMove={(e: any) => {
-          const attr = e.target.attrs;
-          const newCoords = [coords[0], coords[1], attr.x, attr.y, coords[4]]
-          // adjust(newCoords);
-        }}
+        fill="blue"
+        opacity={0.3}
       />;
       break;
-    case 'stripe':
+    case 'rect':
       return <Rect
        key={coords[0]}
         x={coords[2]}
@@ -83,14 +68,8 @@ const pounceOn = (code: any) => {
 
 export const KonvaCanvas = (props: any) => {
   const [code, setCode] = useState(props.pounceCode);
-  // console.log("code", code);
   let canvasCmds = pounceOn(code);
   
-  if (!canvasCmds) {
-    canvasCmds = [];
-  }
-  
-
   return (<div className="parent">
     <div className="div1"><h3>transparentsea</h3></div>
     <div className="div2">

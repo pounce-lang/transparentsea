@@ -32,10 +32,10 @@ function App() {
     i w / floor sp * starty +] pounce
 ] [grid] compose
 
-[stripe] 0  
-[[s i] [s i grid] pounce
-  [s i x y] 
-  [s x i rnd0 - push y  rnd* i + push sz rnd0 push sz rnd* push s i] pounce
+0  
+[[i] [i grid] pounce
+  [i x y] 
+  [[rect] x i rnd0 - push y rnd* i + push sz rnd0 push sz rnd* push i] pounce
 ] 60 times
 drop drop            `}
             shapes={
