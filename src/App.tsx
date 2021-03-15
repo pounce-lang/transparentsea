@@ -16,7 +16,7 @@ function App() {
 # generative art? using the pounce programming language: a grid of random rectangles
 [10] [w] compose
 [400] [h] compose
-[40] [startx] compose
+[70] [startx] compose
 [40] [starty] compose
 [60] [sp] compose 
 [50] [sz] compose 
@@ -24,7 +24,6 @@ function App() {
 [random 20 * 10 - +] [rnd] compose
 [dup dup random * [2 /] dip swap - +] [rnd0] compose
 [[v] [v random v 20 / * v 40 / - +] pounce] [rnd*] compose
-
 
 [
   [i] [
@@ -36,10 +35,9 @@ function App() {
 [stripe] 0  
 [[s i] [s i grid] pounce
   [s i x y] 
-  [s x rnd push y rnd* push sz rnd0 push sz rnd* push s i] pounce
+  [s x i rnd0 - push y  rnd* i + push sz rnd0 push sz rnd* push s i] pounce
 ] 60 times
-drop drop
-            `}
+drop drop            `}
             shapes={
               src
             }
