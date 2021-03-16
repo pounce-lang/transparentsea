@@ -68,10 +68,12 @@ const pounceOn = (precode: string, code: string) => {
 
 export const KonvaCanvas = (props: any) => {
   const [code, setCode] = useState(props.pounceCode);
-  let canvasCmds = pounceOn(props.preambleCode, code);
+  const canvasCmds = pounceOn(props.preambleCode, code);
   
+  const shapes: [] = typeof canvasCmds[0] === 'object'? canvasCmds[0] as []: [];
+
   return (<div className="parent">
-    <div className="div1"><h3>transparentsea</h3></div>
+    <div className="div1"><h2>sixty</h2></div>
     <div className="div2">
       <textarea
         rows={20} cols={50}
@@ -95,7 +97,7 @@ export const KonvaCanvas = (props: any) => {
         width={670} height={500}>
         <Layer>
           {
-            canvasCmds?.[0]?.map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
+            shapes.map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
           }
         </Layer>
       </Stage>
