@@ -4,43 +4,43 @@ import './App.css'
 import { KonvaCanvas } from './KonvaCanvas';
 
 function App() {
-  const [src, setSrc] = useState(`
-  
-  `);
+
 
   return (
     <div className="App">
       
-          <KonvaCanvas pounceCode={
-            `
-# generative art? using the pounce programming language: a grid of random rectangles
+          <KonvaCanvas 
+            preambleCode={`
 [10] [w] compose
-[400] [h] compose
-[70] [startx] compose
-[40] [starty] compose
-[60] [sp] compose 
-[50] [sz] compose 
-128 seedrandom
+[6] [h] compose
+[40] [xOffset] compose
+[40] [yOffset] compose
+[30] [padding] compose
 [random 20 * 10 - +] [rnd] compose
 [dup dup random * [2 /] dip swap - +] [rnd0] compose
 [[v] [v random v 20 / * v 40 / - +] pounce] [rnd*] compose
-
 [
-  [i] [
-    i 1 + 
-    i w % sp * startx + 
-    i w / floor sp * starty +] pounce
-] [grid] compose
+  [] 0 [ [i] [
+  [] i w % padding * xOffset + push
+  i w / floor padding * yOffset + push push i 1 +] pounce
+] 60 times drop] [grid] compose
+1 seedrandom
+            `}
+          
+          pounceCode={
+            `
+# generative art! using the pounce programming language
+# a grid of shapes 
 
-0  
-[[i] [i grid] pounce
-  [i x y] 
-  [[rect] x i rnd0 - push y rnd* i + push sz rnd0 push sz rnd* push i] pounce
-] 60 times
-drop drop            `}
-            shapes={
-              src
-            }
+124 seedrandom
+
+grid
+[
+  [xy]
+  [[rect] xy [20 20 ] concat [rnd] map concat]
+  pounce
+] map
+`}
           ></KonvaCanvas>
       </div>
   )

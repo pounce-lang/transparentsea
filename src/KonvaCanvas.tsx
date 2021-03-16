@@ -54,9 +54,9 @@ const paintElement = (coords: any, color: any = "tan") => {
   }
 };
 
-const pounceOn = (code: any) => {
+const pounceOn = (precode: string, code: string) => {
   try {
-    const cat = interpreter(code);
+    const cat = interpreter(precode + " " + code);
     const retval = cat.next()?.value;
     return retval? retval?.stack: [];
   } catch (e) {
@@ -68,7 +68,7 @@ const pounceOn = (code: any) => {
 
 export const KonvaCanvas = (props: any) => {
   const [code, setCode] = useState(props.pounceCode);
-  let canvasCmds = pounceOn(code);
+  let canvasCmds = pounceOn(props.preambleCode, code);
   
   return (<div className="parent">
     <div className="div1"><h3>transparentsea</h3></div>
@@ -95,8 +95,7 @@ export const KonvaCanvas = (props: any) => {
         width={670} height={500}>
         <Layer>
           {
-            canvasCmds
-              .map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
+            canvasCmds?.[0]?.map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
           }
         </Layer>
       </Stage>
