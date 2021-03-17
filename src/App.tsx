@@ -21,10 +21,27 @@ function App() {
 [[v] [v random v 20 / * v 40 / - +] pounce] [rnd*] compose
 [
   [] 0 [ [i] [
-  [] i w % padding * xOffset + push
-  i w / floor padding * yOffset + push push i 1 +] pounce
+  [] i w % push
+  i w / floor push push i 1 +] pounce
 ] 60 times drop] [grid] compose
 1 seedrandom
+[0 outAt] [outId] compose
+[1 inAt] [inShape] compose
+[1 outAt] [outShape] compose
+[2 inAt] [inX] compose
+[2 outAt] [outX] compose
+[3 inAt] [inY] compose
+[3 outAt] [outY] compose
+[4 inAt] [inW] compose
+[4 outAt] [outW] compose
+[5 inAt] [inH] compose
+[5 outAt] [outH] compose
+[6 inAt] [inColor] compose
+[6 outAt] [outColor] compose
+[[outX padding * xOffset + inX 
+  outY padding * yOffset + inY
+  outW padding * inW
+  outH padding * inH] map] [scale] compose
             `}
           
           pounceCode={
@@ -32,12 +49,12 @@ function App() {
 # generative art! using the pounce programming language
 # a grid of shapes 
 
+
 124 seedrandom
 
 grid
-[
-  [xy]
-  [[rect] xy [20 20 ] concat [rnd] map concat]
+[ [xy]
+  [[rect] xy [rnd* 60 * 20 +] map [1 1 ] [50 *] map concat concat]
   pounce
 ] map
 `}
