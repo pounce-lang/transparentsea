@@ -21,6 +21,7 @@ const paintElement = (coords: any, color: any = "tan") => {
   switch (coords[1]) {
     case 'square':
       return <Rect
+      key={coords[0]}
         x={coords[2]}
         y={coords[3]}
         width={coords[4]}
@@ -31,6 +32,7 @@ const paintElement = (coords: any, color: any = "tan") => {
       break;
     case 'circle':
       return <Circle
+      key={coords[0]}
         x={coords[2]}
         y={coords[3]}
         radius={coords[4]}
@@ -97,7 +99,7 @@ export const KonvaCanvas = (props: any) => {
         width={670} height={500}>
         <Layer>
           {
-            shapes.map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
+            shapes.map(e=>paintElement(e, "#08f")) // .map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
           }
         </Layer>
       </Stage>

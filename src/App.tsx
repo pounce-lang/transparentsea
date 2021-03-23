@@ -21,7 +21,7 @@ function App() {
 [[v] [v random v 20 / * v 40 / - +] pounce] [rnd*] compose
 [
   [] 0 [ [i] [
-  [] i w % push
+  [] i push i w % push
   i w / floor push push i 1 +] pounce
 ] 60 times drop] [grid] compose
 1 seedrandom
@@ -49,14 +49,15 @@ function App() {
 # generative art! using the pounce programming language
 # a grid of shapes 
 
-
 124 seedrandom
 
 grid
-[ [xy]
-  [[rect] xy [rnd* 60 * 20 +] map [1 1 ] [50 *] map concat concat]
-  pounce
-] map
+[[40 * 40 +] map 20 push] map
+[uncons circle swap cons cons 20 push ] map
+[114 circle 60 60 40 50] push
+[115 circle 140 60 40 50] push
+[116 circle 60 140 40 50] push
+[117 circle 140 140 40 50] push
 `}
           ></KonvaCanvas>
       </div>
