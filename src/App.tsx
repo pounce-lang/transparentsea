@@ -46,18 +46,20 @@ function App() {
           
           pounceCode={
             `
+
 # generative art! using the pounce programming language
 # a grid of shapes 
 
-124 seedrandom
+12 seedrandom
 
 grid
-[[40 * 40 +] map 20 push] map
-[uncons circle swap cons cons 20 push ] map
-[114 circle 60 60 40 50] push
-[115 circle 140 60 40 50] push
-[116 circle 60 140 40 50] push
-[117 circle 140 140 40 50] push
+[uncons [50 * 110 +] map 20 push cons] map
+[uncons circle swap cons cons 20 push] map
+[114 circle 335 50 - 335 50 - 50] play [] cons cons cons cons cons push
+[115 circle 135 235 50] push
+[116 circle 235 135 50] push
+[117 circle 135 135 50] push
+
 `}
           ></KonvaCanvas>
       </div>
