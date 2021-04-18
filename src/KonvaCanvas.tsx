@@ -116,7 +116,7 @@ export const KonvaCanvas = (props: any) => {
         width={620} height={620}>
         <Layer>
           {
-            shapes.map(e=>paintElement(e, "#08f")) // .map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
+            shapes.map(e=>paintElement(e)) // .map((coordinate: any, i: any) => paintElement([i, ...coordinate]))
           }
         </Layer>
       </Stage>
