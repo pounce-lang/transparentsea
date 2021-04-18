@@ -38,6 +38,8 @@ function App() {
 [5 outAt] [outH] compose
 [6 inAt] [inColor] compose
 [6 outAt] [outColor] compose
+[7 inAt] [inAlpha] compose
+[7 outAt] [outAlpha] compose
 [[outX padding * xOffset + inX 
   outY padding * yOffset + inY
   outW padding * inW
@@ -46,18 +48,69 @@ function App() {
           
           pounceCode={
             `
-# generative art! using the pounce programming language
-# a grid of shapes 
+# logo
+[  120 10  600 "#bed"
+  [r  pad sz color] 
+  [ []
+    [0 rect 0 pad 0 0 color 1]
+    pad r + inX 
+    sz r - inW sz r - inH push
+    [1 circle 0 0 r r color 1]
+    pad r + inX pad r + inY push
+    [2 circle 0 0 r r color 1]
+    pad r + inX pad sz + r - inY push
+    [3 circle 0 0 r r color 1]
+    pad sz + r - inX pad sz + r - inY push
+    [4 rect pad 0 0 0 color 1]
+    pad r + inY r 1.1 * inW sz r 2 * - inH push
+    [5 rect 0 0 0 0 color 1]
+    pad r + inX pad sz + r 1.1 * - inY sz r 2 * - inW r 1.1 * inH push
+  ] pounce
+] [bg] compose
 
-124 seedrandom
+[[20 circle 210 350 70 0 "#006" 1]] [head] compose
 
-grid
-[[40 * 40 +] map 20 push] map
-[uncons circle swap cons cons 20 push ] map
-[114 circle 60 60 40 50] push
-[115 circle 140 60 40 50] push
-[116 circle 60 140 40 50] push
-[117 circle 140 140 40 50] push
+[150 100 160 10 40 "#006" [x w h r1 r2 color] [[]
+  [should0 rect x 0 w h color 1]
+  610 h - inY push
+  [should1 circle x 460 r1 0 color 1]
+  610 h - r1 + inY push
+  [sh-triangle1 linear x 0 [-9 -1 -30 110 100 100] 0.08 color 1]
+  610 h - r1 + inY push
+  [should2 circle 240 490 r2 0 color 1]
+  x w + inX 610 h - r2 + inY push
+  [sh-triangle2 linear 0 0 [0.2 -5 -140 10 -50 120 30 120] 0 color 1]
+  x w + r2 + inX 610 h - r2 + inY push
+] pounce] [shoulders] compose
+
+[  330 180 240 200 0.2 "#0cc" 0.8
+  [x    y   w   h  t color alpha] 
+  [ []
+    [wow linear x y [] t color alpha]
+    [0 0 w 0] 
+    w 0.98 * push h 0.95 * push
+    -40 push h push
+    -7 push h 0.8 * push 4 inAt
+    push
+  ] pounce
+] [voice-bubble] compose
+    
+[370 320 180 115 [x y w h] [
+  [laptop linear x y [] 0.1 "#888" 0.8]
+  [0 0 w 0 w h h w -50 w 0 h] h w - 8 inAt
+  inW] pounce] [laptop] compose
+
+# thou-0 370 320 180 115 0.5 "#555" 0.5 thought-bubble 
+[[key x y w h tension c a] [
+  [key linear x y [0 0 w 0 w h 0 h] tension c a]
+] pounce] [thought-bubble] compose
+  
+  [] bg concat head push shoulders concat
+voice-bubble concat laptop push
+[thou-0 circle 160 255 18 0 "#555" 0.5] push
+thou-1 130 150 60 60 0.48 "#f55" 0.5 thought-bubble push
+thou-2 200 50 100 90 0.46 "#35f" 0.5 thought-bubble push
+thou-3 300 90 180 120 0.3 "#f66" 0.39 thought-bubble push
 `}
           ></KonvaCanvas>
       </div>
@@ -65,3 +118,34 @@ grid
 }
 
 export default App
+
+//     [wow linear x y [0 0 100 0 100 100 -40 100 -7 80] 0.2 red 0.3]
+// [  320 180 240 200 50 "#4e4" 0.5
+//   [x y w h r color alpha] 
+//   [ []
+//     [vb0 rect 0 0 0 0 color alpha]
+//     x r + inX y r + inY 
+//     w r 2 * - inW h r 2 * - inH push
+//     [vb1 circle 0 0 r r color alpha]
+//     x r + inX y r + inY push
+//     [vb2 circle 0 0 r r color alpha]
+//     x r - w + inX y r + inY push
+//     [vb3 circle 0 0 r r color alpha]
+//     x r - w + inX y r - h + inY push
+//     [vb4 linear x 0 [0 0 r r -60 r] 0 color alpha]
+//     y r - h + inY push
+//     [vbr1 rect x 0 0 0 color alpha]
+//     y r + inY r 1.1 * inW h r 2 * - inH push
+//     [vbr2 rect 0 y 0 0 color alpha]
+//     x r + inX w r 2 * - inW r 1.1 * inH push
+//     [vbr3 rect 0 0 0 0 color alpha]
+//     x r 1.1 * - w + inX 
+//     y r + inY 
+//     r 1.1 * inW 
+//     h r 2 * - inH push
+//     [vbr4 rect x 0 0 0 color alpha]
+//     y r 1.1 * - h + inY 
+//     w r - inW 
+//     r 1.1 * inH push
+//   ] pounce
+// ] [voice-bubble] compose
