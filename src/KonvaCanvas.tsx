@@ -84,13 +84,20 @@ const pounceOn = (precode: string, code: string) => {
   }
 };
 
-
 export const KonvaCanvas = (props: any) => {
-  const [code, setCode] = useState(props.pounceCode);
+  const [codeOpts, setCodeOpts] = useState(props.pounceCodeOpts);
+  const [codeKey, setCodeKey] = useState(props.pounceCode);
+  const [code, setCode] = useState(codeOpts[codeKey]);
+
   const canvasCmds = pounceOn(props.preambleCode, code);
   
   const shapes: [] = typeof canvasCmds[0] === 'object'? canvasCmds[0] as []: [];
-
+  const loadPounceProgram = (selected: HTMLCollectionOf<HTMLOptionElement>) => {
+    console.log(selected[0].innerText);
+    setCodeKey(selected[0].innerText);
+    setCode(codeOpts[selected[0].innerText]);
+  }
+  
   return (<div className="parent">
     <div className="div1"><h2>sixty</h2></div>
     <div className="div2">
@@ -103,6 +110,14 @@ export const KonvaCanvas = (props: any) => {
       </textarea>
     </div>
     <div className="div3">
+      <select
+      onChange={(e)=>loadPounceProgram(e.target.selectedOptions)} 
+      >
+        <option>sixty grid</option>
+        <option>logo one</option>
+        <option>logo two</option>
+        <option selected={true} >logo three</option>
+      </select>
       <textarea
         rows={20} cols={50}
         wrap="true" value={code}
