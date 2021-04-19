@@ -347,7 +347,7 @@ laptop-screen 377 363 152 88 0.15 "#fff" 0.5 thought-bubble push
   ] pounce
 ] [voice-bubble] compose
     
-[360 350 180 115 [x y w h] [
+[350 350 180 115 [x y w h] [
   [laptop linear x y [] 0.1 "#999" 1]
   [0 0 w 0 w h h w -50 w 0 h] h w - 8 inAt
   inW] pounce] [laptop] compose
@@ -361,23 +361,17 @@ laptop-screen 377 363 152 88 0.15 "#fff" 0.5 thought-bubble push
 [thou-0 circle 130 266 18 0 "#555" 0.5] push
 [thou-1 circle 130 190 40 0 "seagreen" 0.7] push
 [thou-2 circle 208 95  60 0 "#35f" 0.5] push
-[thou-3 circle 377 150 90 0 "#f00" 0.5] push
+[thou-3 circle 380 150 90 0 "#f00" 0.5] push
 
 voice-bubble concat 
 
-[thou-v2  circle 370 295 30 0 "seagreen" 0.6] push
-[thou-v4  circle 520 250 34 0 "#97f" 0.7] push
-[thou-v10 circle 398 220 37 0 "#55f" 0.5] push
-[thou-v13 circle 460 320 43 0 "#f55" 0.8] push
-
+[thou-v4  circle 455 270 70 0 "#69e" 1] push
 
 laptop push
 
-laptop-screen 377 363 152 88 0.15 "#fff" 0.5 thought-bubble push
+laptop-screen 367 363 152 88 0.15 "#fff" 0.5 thought-bubble push
 
-[thou-v14 circle 495 420 28 0 "seagreen" 0.6] push
-[thou-v15 circle 410 410 24 0 "#57f" 0.7] push
-[thou-v12 circle 452 380 18 0 "#55f" 0.5] push
+[thou-v14 circle 445 406 38 0 "seagreen" 0.6] push
 `
 }
 }
