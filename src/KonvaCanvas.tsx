@@ -116,7 +116,8 @@ export const KonvaCanvas = (props: any) => {
         <option>sixty grid</option>
         <option>logo one</option>
         <option>logo two</option>
-        <option selected={true} >logo three</option>
+        <option selected={false} >logo three</option>
+        <option selected={true} >logo four</option>
       </select>
       <textarea
         rows={20} cols={50}
