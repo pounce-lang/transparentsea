@@ -7,7 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@pounce-lang/core": "^2.1.0",
+    "@pounce-lang/core": "^2.2.0",
     "konva": "^7.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",

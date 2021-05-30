@@ -46,26 +46,33 @@ function App() {
   outH padding * inH] map] [scale] compose
             `}
           
-            pounceCode="logo four"
+            pounceCode="sixty arc"
             pounceCodeOpts={
                 { "sixty grid":
-            `
-# generative art! using the pounce programming language
-# a grid of shapes 
-12 seedrandom
-grid
-[uncons [50 * 110 +] map 20 push cons] map
-[uncons circle swap cons cons 20 push] map
-[114 circle 335 50 - 335 50 - 50] play [] cons cons cons cons cons push
-[115 circle 135 235 50] push
-[116 circle 235 135 50] push
-[117 circle 135 135 50] push
-`,
+                `
+    # generative art! using the pounce programming language
+    # a grid of shapes 
+    12 seedrandom
+    grid
+    [uncons [50 * 110 +] map 20 push cons] map
+    [uncons circle swap cons cons 20 push] map
+    [114 circle 335 50 - 335 50 - 50] play [] cons cons cons cons cons push
+    [115 circle 135 235 50] push
+    [116 circle 235 135 50] push
+    [117 circle 135 135 50] push
+    `,
+    "sixty arc":
+`
+[
+  [1 arc 100 100 50 20 140 red .5]
+  [2 arc 100 100 55 20 140 green .5]
+  [3 arc 100 100 60 20 140 blue .5]
+]`,
 "logo one":
 `
 # logo 1
 [  120 10  600 "#bee"
-  [r  pad sz color] 
+  [r pad sz color] 
   [ []
     [0 rect 0 pad 0 0 color 1]
     pad r + inX 
